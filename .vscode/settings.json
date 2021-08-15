@@ -1,0 +1,7 @@
+{
+	"files.associations": {
+		"bloom_filter.h": "c",
+		"filters_define.h": "c",
+		"time.h": "c"
+	}
+}

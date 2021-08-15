@@ -12,7 +12,7 @@ inline __attribute__((always_inline)) void make_mask(hash_t h, __m256i *mask_hig
     __m256i hash_data = _mm256_set1_epi32(h);
     hash_data = _mm256_mullo_epi32(rehash, hash_data);
     *mask_high = _mm256_srli_epi64(hash_data, 58);
-    *mask_low = _mm256_slli_epi64(hash_data, 12);
+    *mask_low = _mm256_slli_epi64(hash_data, 6);
     *mask_low = _mm256_srli_epi64(*mask_low, 58);
 
     const __m256i ones = _mm256_set1_epi64x(1);
@@ -49,6 +49,7 @@ inline __attribute__((always_inline)) _Bool bbf_find(hash_t h, block_t *data, ui
 #ifdef FILTERS_TEST
 
 #ifdef FILTERS_TEST_MAIN
+
 #include <mm_malloc.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -74,9 +75,14 @@ int main() {
     for (int i = 0; i < KEY_NUM; ++i) {
         assert(bbf_find(hs[i], data, FILTER_SIZE / 64 - 1));
     }
-
+    // for (int i = 0; i < FILTER_SIZE; ++i) {
+    //     printf("%lu ", data[i]);
+    //     if (i % 32 == 31) {
+    //         puts("");
+    //     }
+    // }
     int fp = 0;
-    for (int i = 0; i < 13000; ++i) {
+    for (int i = 0; i < 10000; ++i) {
         fp += bbf_find(rand() % 0x10000000 + 0x10000000, data, FILTER_SIZE / 64 - 1);
     }
     printf("%d/10000\n", fp);
