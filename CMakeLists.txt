@@ -4,11 +4,15 @@ project(filters)
 set(CMAKE_C_STANDARD 11)
 
 add_compile_options(-mavx2)
+
 add_library(blocked_bloom_filter STATIC src/blocked_bloom_filter.c)
 target_include_directories(blocked_bloom_filter PUBLIC include)
 
 add_library(bloom_filter STATIC src/bloom_filter.c)
 target_include_directories(bloom_filter PUBLIC include)
+
+install(TARGETS blocked_bloom_filter DESTINATION .)
+install(TARGETS bloom_filter DESTINATION .)
 
 option(FILTERS_TEST "Build filters test" OFF)
 if (FILTERS_TEST)
