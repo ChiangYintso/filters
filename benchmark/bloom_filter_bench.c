@@ -12,7 +12,7 @@
 int main() {
     uint8_t *data = malloc(FILTER_SIZE);
 
-    memset((void *) data, 0, sizeof(uint8_t) * FILTER_SIZE);
+    memset((void *)data, 0, sizeof(uint8_t) * FILTER_SIZE);
 
     srand(time(NULL));
     hash_t hs[KEY_NUM];

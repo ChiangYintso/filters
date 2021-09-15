@@ -35,9 +35,9 @@ _Bool bf_find(hash_t h, uint8_t *data, size_t len) {
 
 int main() {
     uint8_t *data = malloc(FILTER_SIZE);
-    
-    memset((void *) data, 0, sizeof(uint8_t) * FILTER_SIZE);
-    
+
+    memset((void *)data, 0, sizeof(uint8_t) * FILTER_SIZE);
+
     srand(time(NULL));
     hash_t hs[KEY_NUM];
     for (int i = 0; i < KEY_NUM; ++i) {

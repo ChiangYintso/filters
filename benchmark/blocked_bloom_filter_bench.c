@@ -1,11 +1,11 @@
 #include "blocked_bloom_filter.h"
 
 #include <assert.h>
+#include <mm_malloc.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include <mm_malloc.h>
 
 #define KEY_NUM 104857
 #define FILTER_SIZE 131072
@@ -13,7 +13,7 @@
 int main() {
     uint8_t *data = _mm_malloc(FILTER_SIZE, 64);
 
-    memset((void *) data, 0, sizeof(uint8_t) * FILTER_SIZE);
+    memset((void *)data, 0, sizeof(uint8_t) * FILTER_SIZE);
 
     srand(time(NULL));
     hash_t hs[KEY_NUM];
@@ -25,7 +25,7 @@ int main() {
         assert(bbf_find(hs[i], data, FILTER_SIZE / 64 - 1));
     }
 
-	clock_t start = clock();
+    clock_t start = clock();
     int fp = 0;
     for (int i = 0; i < 1000000; ++i) {
         fp += bbf_find(rand(), data, FILTER_SIZE / 64 - 1);
