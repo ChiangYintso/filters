@@ -9,7 +9,7 @@ commands:
     steps:
       - run: apt-get -y update &&
           apt-get -y install
-          curl gcc-10 git cmake
+          curl gcc g++ git cmake
 jobs:
   build_test_bench:
     docker:
